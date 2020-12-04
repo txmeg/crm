@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!--加入日志-->
+    <!--<settings>
+        <setting name="logImpl" value="STDOUT_LOGGING"/>
+    </settings>-->
+
+    <properties resource="jdbc.properties"/>
+
+    <!--设置别名-->
+    <typeAliases>
+        <!--实体类所在的包名-->
+        <package name="com.bjpowernode.crm.settings.domain"/>
+        <package name="com.bjpowernode.crm.workbench.domain"/>
+    </typeAliases>
+
+    <environments default="mydatasource">
+        <environment id="mydatasource">
+            <transactionManager type="JDBC"/>
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driver}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.username}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+
+    <!--sql（mapper）映射文件位置-->
+    <mappers>
+        <!--name:包名，这个包中的mapper.xml文件一次都能加载到-->
+        <!--
+            使用package要求：
+            1.mapper接口名和dao接口名必须完全一样，包括大小写
+            2.mapper文件必须和dao接口在同一目录
+        -->
+        <package name="com.bjpowernode.crm.settings.dao"/>
+        <package name="com.bjpowernode.crm.workbench.dao"/>
+    </mappers>
+</configuration>
